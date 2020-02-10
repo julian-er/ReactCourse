@@ -23,24 +23,51 @@ class App extends Component {
     
   }
 
-  switchPersonHandler = () =>{
+  switchPersonHandler = (name) =>{
 
-    if (!this.state.switchedName){
       this.setState({
-        name:"Componentesito",
-        age:"soy recién nacido"
+        person: [
+          {
+            name:name,
+            age:"tengo 1 dia de creado"
+          },
+          {
+            name:"Componentesito",
+            age:"tengo 1 ratin"
+          },
+          {
+            name:"Componente mayor",
+            age:"tengo 1 mes de creado"
+          }
+      ]
       })
-    }
-    console.log(this.state.switchedName)
   
   }
 
-  // handleCreatePerson = () => {
+  nameChangeHandler = (event) =>{
 
-  //   this.state.person.map( () => {  <Person name={this.state.name} age={this.state.age}/> }
-  //   )
+    this.setState({
+      person: [
+        {
+          name:event.target.value,
+          age:"tengo 1 dia de creado"
+        },
+        {
+          name:"Componentesito",
+          age:"tengo 1 ratin"
+        },
+        {
+          name:"Componente mayor",
+          age:"tengo 1 mes de creado"
+        }
+    ]
+    })
 
-  // }
+}
+
+  
+
+
 
 render(){
 
@@ -48,11 +75,22 @@ render(){
             <div className="App">
               <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
-                {this.handleCreatePerson} <button onClick={this.switchPersonHandler}>Switch Name</button>
+                {this.handleCreatePerson} <button onClick={this.switchPersonHandler.bind(this, 'pepe grillo')}>Switch Name</button>
               </header>
-              <Person name={this.state.person[0].name} age={this.state.person[0].age}/>
-              <Person name={this.state.person[1].name} age={this.state.person[1].age}/>
-              <Person name={this.state.person[2].name} age={this.state.person[2].age}/>
+              <Person 
+                name={this.state.person[0].name} 
+                age={this.state.person[0].age}
+                click={()=> this.switchPersonHandler('juan')}
+                change = {this.nameChangeHandler}
+              />
+              <Person 
+                name={this.state.person[1].name} 
+                age={this.state.person[1].age}
+              />
+              <Person 
+                name={this.state.person[2].name} 
+                age={this.state.person[2].age}
+              />
             </div>
           );
         }
