@@ -95,26 +95,12 @@ render(){
     );
 
   }
-
-  //variable to change css dinamic
-  const classes = [];
-
-  //conditional for change the css class dinamic
-
-  if (this.state.person.length <= 2){
-    classes.push('red');
-  } 
-  if (this.state.person.length <= 1){
-    classes.push('bold')
-  }
-
-
           return (
             <div className="App">
                 <Cockpit  
                 dinamic={this.state.showPersons}
                 clicked={this.togglePersonsHandler}
-                class={classes}/>
+                person={this.state.person}/>
                 {persons}
             </div>
           );

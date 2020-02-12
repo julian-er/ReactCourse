@@ -1,5 +1,7 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
+
+
 
 // create StyledButton component whit styles using styled components package
 const StyledButton = styled.button`
@@ -16,9 +18,25 @@ const StyledButton = styled.button`
 `;
 
 const Cockpit = (props) => {
+
+      //variable to change css dinamic
+    const classes = [];
+
+
+
+      //conditional for change the css class dinamic
+
+    if (props.person.length <= 2){
+        classes.push('red');
+    } 
+    if (props.person.length <= 1){
+        classes.push('bold')
+    }
+
+
     return (<div>
     <h1>Soy una aplicación de React</h1>
-    <p className={props.class.join(' ')}> ¡ y realmente funciono !</p> 
+    <p className={classes.join(' ')}> ¡ y realmente funciono !</p> 
     <StyledButton 
     dinamic={props.dinamic}
     onClick={props.clicked}
