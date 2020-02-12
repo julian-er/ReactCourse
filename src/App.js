@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Components/Person';
 import styled from 'styled-components';
-
+import ErrorBoundary from './Components/ErrorBoundary'
 
 // create StyledButton component whit styles using styled components package
 const StyledButton = styled.button`
@@ -100,13 +100,14 @@ render(){
     persons = (
       <div>
           {this.state.person.map((person, index) => {
-            return <Person 
-            key = {person.id}
+            return <ErrorBoundary key = {person.id}>
+            <Person 
             name={person.name} 
             age={person.age}
             click={ () => this.deletePersonHandler (index)}
             change={(event)=> this.nameChangeHandler(event, person.id)}
-          />
+            />
+            </ErrorBoundary>
           })}
               </div> 
     );
