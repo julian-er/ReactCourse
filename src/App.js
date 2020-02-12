@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Person from './Components/Person'
+import Person from './Components/Person';
+import styled from 'styled-components';
+
+
+// create StyledButton component whit styles using styled components package
+const StyledButton = styled.button`
+    background-color: ${ props => props.dinamic ? 'red' : 'green'};
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+    color: white;
+    
+    &:hover{
+      background-color: ${ props => props.dinamic ? 'salmon' : 'lightgreen'};
+      color:black;
+`;
 
 class App extends Component {
 
@@ -73,21 +88,14 @@ togglePersonsHandler = () => {
 
 render(){
 
-  const style = {
-    backgroundColor: 'green',
-    font: 'inherit',
-    border: '1px solid blue',
-    padding: '8px',
-    cursor: 'pointer',
-    color: 'white'
-  };
+
 
   // variable to show persons dinamic
   let persons = null;
 
   // conditional for show persons when state change and add some stile button
   if (this.state.showPersons){
-    style.backgroundColor= 'red'
+    
 
     persons = (
       <div>
@@ -122,15 +130,11 @@ render(){
             <div className="App">
                 <h1>Soy una aplicación de React</h1>
                 <p className={classes.join(' ')}> ¡ y realmente funciono !</p> {/*  Add join ' ' because, push action make red,bold an we need to add red bold*/}
-                <button 
+                <StyledButton 
+                dinamic={this.state.showPersons}
                 onClick={this.togglePersonsHandler}
-                style={style}
-                >Show persons</button>
-
-
-            {persons}
-              
-
+                >Show persons</StyledButton>
+                {persons}
             </div>
           );
         }
