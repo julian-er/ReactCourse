@@ -28,7 +28,7 @@ class App extends Component {
 
     
   }
-
+ // funtion to delete "card" of person when i clicked
   deletePersonHandler = (personIndex) => {
     //const persons = this.state.person
     const persons = [...this.state.person]
@@ -36,7 +36,7 @@ class App extends Component {
     this.setState({person:persons})
 
   }
-
+//function to change name when you change the input
   nameChangeHandler = (event, id) =>{
     const personIndex = this.state.person.findIndex(p => {
       return p.id === id;
@@ -58,6 +58,7 @@ class App extends Component {
 
 }
 
+// function to change state for show list of persons
 togglePersonsHandler = () => {
   const doesShow = this.state.showPersons
   this.setState({
@@ -73,16 +74,20 @@ togglePersonsHandler = () => {
 render(){
 
   const style = {
-    backgroundColor: 'white',
+    backgroundColor: 'green',
     font: 'inherit',
     border: '1px solid blue',
     padding: '8px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    color: 'white'
   };
 
+  // variable to show persons dinamic
   let persons = null;
 
+  // conditional for show persons when state change and add some stile button
   if (this.state.showPersons){
+    style.backgroundColor= 'red'
 
     persons = (
       <div>
@@ -99,14 +104,29 @@ render(){
     );
 
   }
+
+  //variable to change css dinamic
+  const classes = [];
+
+  //conditional for change the css class dinamic
+
+  if (this.state.person.length <= 2){
+    classes.push('red');
+  } 
+  if (this.state.person.length <= 1){
+    classes.push('bold')
+  }
+
+
           return (
             <div className="App">
-              <header className="App-header">
+                <h1>Soy una aplicación de React</h1>
+                <p className={classes.join(' ')}> ¡ y realmente funciono !</p> {/*  Add join ' ' because, push action make red,bold an we need to add red bold*/}
                 <button 
                 onClick={this.togglePersonsHandler}
                 style={style}
                 >Show persons</button>
-              </header>
+
 
             {persons}
               
