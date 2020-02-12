@@ -23,8 +23,8 @@ const person = (props) => {
 //     }
 // }
 
-return <StyledDiv onClick={props.click}>
-            <p >¡Hola! soy {props.name} y {props.age}</p>
+return <StyledDiv >
+            <p onClick={props.click}>¡Hola! soy {props.name} y {props.age}</p>
             <input type="text" onChange={props.change} value={props.name}></input>
 
             </StyledDiv>
