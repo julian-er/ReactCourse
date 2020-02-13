@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropType from 'prop-types'
 
 
 
@@ -44,4 +45,11 @@ const Cockpit = (props) => {
     </StyledButton>
     </div>
     )}
+
+  Cockpit.propType={
+    dinamic: PropType.func,
+    onClick: PropType.func,
+    person: PropType.object
+  }
+
 export default Cockpit

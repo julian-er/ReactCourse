@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 //import './Person.css';
 const StyledDiv =  styled.div`
@@ -17,21 +18,19 @@ width: 450px;
 
 const person = (props) => {
 
-// const Style = {
-//     '@media (min-width: 500px':{
-//         width: '450px'
-//     }
-// }
 
 return <StyledDiv >
             <p onClick={props.click}>¡Hola! soy {props.name} y {props.age}</p>
             <input type="text" onChange={props.change} value={props.name}></input>
 
-            </StyledDiv>
-
-
-
-
+        </StyledDiv>
 }
+
+person.propTypes = {
+    click : PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.string,
+    change: PropTypes.func
+};
 
 export default person

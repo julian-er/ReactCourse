@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 // import Person from './Components/Person';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 // import ErrorBoundary from './Components/ErrorBoundary'
 import Persons from './Components/Persons'
 import Cockpit from './Components/Cockpit'
@@ -108,3 +108,4 @@ render(){
 }
 
 export default App;
+  
