@@ -11,6 +11,7 @@ const Persons = (props) => props.persons.map((person, index) => {
         age={person.age}
         click={ () => props.clicked (index)}
         change={(event)=> props.changed(event, person.id)}
+        // isAuth={props.isAuthenticated}
         />
         </ErrorBoundary>
       });

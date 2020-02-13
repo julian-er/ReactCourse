@@ -5,6 +5,7 @@ import './App.css';
 // import ErrorBoundary from './Components/ErrorBoundary'
 import Persons from './Components/Persons'
 import Cockpit from './Components/Cockpit'
+import AuthContext from './Context/auth-context'
 
 class App extends Component {
 
@@ -27,7 +28,8 @@ class App extends Component {
         }
     ],
     otherState :' something ',
-    showPersons: false
+    showPersons: false,
+    authenticated: false
 
     
   }
@@ -70,6 +72,11 @@ togglePersonsHandler = () => {
 
 }
 
+loginHandler = () => {
+
+  this.setState({ authenticated: !this.state.authenticated })
+
+}
   
 
 
@@ -90,6 +97,7 @@ render(){
         <Persons persons={this.state.person} 
         clicked = {this.deletePersonHandler} 
         changed={this.nameChangeHandler}
+        isAuthenticated={this.state.authenticated}
         />
       </div> 
     );
@@ -97,11 +105,18 @@ render(){
   }
           return (
             <div className="App">
+              <AuthContext.Provider 
+              value={{
+                authenticated: this.state.authenticated, 
+                login: this.loginHandler}}
+              > 
                 <Cockpit  
                 dinamic={this.state.showPersons}
                 clicked={this.togglePersonsHandler}
-                person={this.state.person}/>
+                person={this.state.person}
+                />
                 {persons}
+              </AuthContext.Provider>  
             </div>
           );
         }

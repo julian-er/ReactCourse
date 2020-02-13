@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import AuthContext from '../Context/auth-context'
 
 //import './Person.css';
 const StyledDiv =  styled.div`
@@ -20,6 +21,11 @@ const person = (props) => {
 
 
 return <StyledDiv >
+            <AuthContext.Consumer>
+                {(context)=>
+                context.authenticated?<h1>AUTHENTICATED</h1>:<h1>PLEASE LOG IN</h1> }
+            </AuthContext.Consumer>
+            {}
             <p onClick={props.click}>¡Hola! soy {props.name} y {props.age}</p>
             <input type="text" onChange={props.change} value={props.name}></input>
 

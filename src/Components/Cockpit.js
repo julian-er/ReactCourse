@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropType from 'prop-types'
+import AuthContext from '../Context/auth-context'
 
 
 
@@ -43,6 +44,10 @@ const Cockpit = (props) => {
     onClick={props.clicked}
     >Show persons
     </StyledButton>
+    <br></br>
+    <AuthContext.Consumer>
+    {context => <button onClick={context.login}>Log In</button>}
+    </AuthContext.Consumer>
     </div>
     )}
 
