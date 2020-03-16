@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Components/Person';
-import styled from 'styled-components';
-import ErrorBoundary from './Components/ErrorBoundary'
-
-// create StyledButton component whit styles using styled components package
-const StyledButton = styled.button`
-    background-color: ${ props => props.dinamic ? 'red' : 'green'};
-    font: inherit;
-    border: 1px solid blue;
-    padding: 8px;
-    cursor: pointer;
-    color: white;
-    
-    &:hover{
-      background-color: ${ props => props.dinamic ? 'salmon' : 'lightgreen'};
-      color:black;
-`;
+// import Person from './Components/Person';
+//import styled from 'styled-components';
+// import ErrorBoundary from './Components/ErrorBoundary'
+import Persons from './Components/Persons'
+import Cockpit from './Components/Cockpit'
+import AuthContext from './Context/auth-context'
 
 class App extends Component {
 
@@ -39,7 +28,8 @@ class App extends Component {
         }
     ],
     otherState :' something ',
-    showPersons: false
+    showPersons: false,
+    authenticated: false
 
     
   }
@@ -82,6 +72,11 @@ togglePersonsHandler = () => {
 
 }
 
+loginHandler = () => {
+
+  this.setState({ authenticated: !this.state.authenticated })
+
+}
   
 
 
@@ -99,46 +94,33 @@ render(){
 
     persons = (
       <div>
-          {this.state.person.map((person, index) => {
-            return <ErrorBoundary key = {person.id}>
-            <Person 
-            name={person.name} 
-            age={person.age}
-            click={ () => this.deletePersonHandler (index)}
-            change={(event)=> this.nameChangeHandler(event, person.id)}
-            />
-            </ErrorBoundary>
-          })}
-              </div> 
+        <Persons persons={this.state.person} 
+        clicked = {this.deletePersonHandler} 
+        changed={this.nameChangeHandler}
+        isAuthenticated={this.state.authenticated}
+        />
+      </div> 
     );
 
   }
-
-  //variable to change css dinamic
-  const classes = [];
-
-  //conditional for change the css class dinamic
-
-  if (this.state.person.length <= 2){
-    classes.push('red');
-  } 
-  if (this.state.person.length <= 1){
-    classes.push('bold')
-  }
-
-
           return (
             <div className="App">
-                <h1>Soy una aplicación de React</h1>
-                <p className={classes.join(' ')}> ¡ y realmente funciono !</p> {/*  Add join ' ' because, push action make red,bold an we need to add red bold*/}
-                <StyledButton 
+              <AuthContext.Provider 
+              value={{
+                authenticated: this.state.authenticated, 
+                login: this.loginHandler}}
+              > 
+                <Cockpit  
                 dinamic={this.state.showPersons}
-                onClick={this.togglePersonsHandler}
-                >Show persons</StyledButton>
+                clicked={this.togglePersonsHandler}
+                person={this.state.person}
+                />
                 {persons}
+              </AuthContext.Provider>  
             </div>
           );
         }
 }
 
 export default App;
+  
